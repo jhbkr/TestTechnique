@@ -2,6 +2,7 @@ import express from "express";
 // empêche les erreus de cors
 import cors from "cors";
 import fs from "fs/promises";
+import { write } from "fs";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -62,6 +63,22 @@ app.post("listings", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ err: "Le serveur à une erreur" });
+  }
+});
+
+// editer l'app
+app.put("/listings/:id", async (req, res) => {
+  try {
+    const db = await readDB();
+    const index = db.listings.findIndex((l) => l.id === req.params.id);
+    if (index === -1)
+      return res.status(404).json({ error: "Annonce inexistante" });
+    const [removed] = db.listings.splice(index, 1);
+    await writeDB(db);
+    res.json(removed);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err: "Le serveur a une erreur" });
   }
 });
 
