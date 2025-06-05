@@ -1,21 +1,57 @@
 import express from "express";
-import cors from "cors";
 // empêche les erreus de cors
+import cors from "cors";
+import fs from "fs/promises";
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(cors());
-//permet d'utiliser les entête de cors qui vont empêcher les erreurs
-app.use(express.json());
-//permet la lecture du json
 
+//permet d'utiliser les entête de cors qui vont empêcher les erreurs
+app.use(cors());
+//permet la lecture du json
+app.use(express.json());
+
+// on fait un chemin de db.json pour qu'il lise les donnéess
+const DB_FILE = new URL("./db.json", import.meta.url).pathname;
+
+//On lit le fichier
+async function readDB() {
+  //permet de lister les donnéees
+  const data = await fs.readFile(DB_FILE, "utf-8");
+  return JSON.parse(data);
+}
 
 //ROUTES
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("API Coloc : ok");
+});
+
+//permet la lecture et le listing
+app.get("/listings", async (req, res) => {
+  try {
+    const db = await readDB();
+    res.json(db.listings);
+  } catch (err) {
+    console.error("Impossible de lire la db:", err);
+    res.status(500).json({ err: "Le serveur à une erreur" });
+  }
+});
+
+// pour la lecture des détails de l'annonce
+app.get("/listings/:id", async (req, res) => {
+  try {
+    const db = await readDB();
+    const listing = db.listings.find((l) => l.id === req.params.id);
+    if (!listing) return res.status(404).json({ error: "Annonce inexistante" });
+    res.json(listing);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ err: "Le serveur à une erreur" });
+  }
 });
 
 //lance le serv
-app.listenerCount(PORT, () => {
+app.listen(PORT, () => {
   console.log(`APP qui démarre sur le port : ${PORT}`);
 });
