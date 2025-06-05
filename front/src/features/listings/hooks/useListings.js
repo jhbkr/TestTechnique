@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/api/axios";
 
-// récupère les annonces 
+// récupère les annonces pour les montrer 
 
 export const useListings = (params = {}) =>
   useQuery({

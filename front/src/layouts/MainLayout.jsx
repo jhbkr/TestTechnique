@@ -7,7 +7,12 @@ export default function MainLayout() {
         <Link to="/" className="font-bold">
           ColocApp
         </Link>
-        {/* plus tard : bouton “Nouvelle annonce” */}
+        <Link
+          to="/new"
+          className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
+        >
+          Nouvelle annonce
+        </Link>
       </header>
 
       <main className="min-h-screen bg-slate-50 text-slate-900">
