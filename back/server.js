@@ -66,8 +66,25 @@ app.post("listings", async (req, res) => {
   }
 });
 
-// editer l'app
+// mise à jour d'une annonce
 app.put("/listings/:id", async (req, res) => {
+  try {
+    const db = await readDB();
+    const index = db.listings.findIndex((l) => l.id === req.params.id);
+    if (index === -1)
+      return res.status(404).json({ error: "Annonce inexistante" });
+
+    db.listings[index] = { ...db.listings[index], ...req.body };
+    await writeDB(db);
+    res.json(db.listings[index]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ err: "Le serveur a une erreur" });
+  }
+});
+
+// supprimer l'annonce
+app.delete("/listings/:id", async (req, res) => {
   try {
     const db = await readDB();
     const index = db.listings.findIndex((l) => l.id === req.params.id);
