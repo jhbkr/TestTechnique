@@ -1,0 +1,12 @@
+{
+  "listings": [
+    {
+      "id": "1",
+      "title": "Chambre spacieuse à Lyon 7",
+      "city": "Lyon",
+      "rent": 520,
+      "type": "T3",
+      "description": "15 m² dans appartement de 82 m², métro Jean Macé."
+    }
+  ]
+}
