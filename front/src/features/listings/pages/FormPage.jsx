@@ -12,7 +12,7 @@ export default function FormPage({ mode }) {
   const create = useCreateListing();
   const update = useUpdateListing();
 
-  const { data: existing } = useListing(id);
+  const { data: existing, isLoading } = useListing(id);
 
   const handleSubmit = (payload) => {
     if (mode === "edit") {
@@ -27,14 +27,17 @@ export default function FormPage({ mode }) {
 
   const loading = create.isPending || update.isPending;
 
+  /* on fait un écran de chargement avant de pouvoir faire la modif de l'annonce */
+  if (mode === "edit" && isLoading) return <p className="p-4">Chargement…</p>;
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">
-        {mode === "modifier" ? "Modifier l’annonce" : "Nouvelle annonce"}
+        {mode === "edit" ? "Modifier l’annonce" : "Nouvelle annonce"}
       </h1>
 
       <ListingForm
-        initial={mode === "modifier" ? existing : undefined}
+        initial={mode === "edit" ? existing : undefined}
         onSubmit={handleSubmit}
         loading={loading}
       />

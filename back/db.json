@@ -15,6 +15,14 @@
       "rent": 480,
       "type": "T4",
       "description": "Grande pièce de vie, arrêt tram Commerce à 5 min."
+    },
+    {
+      "id": "hq3B0hW7",
+      "title": "Villa sur Nice",
+      "city": "Nice",
+      "type": "T2",
+      "rent": 700,
+      "description": "Loyer convivial sur Nice"
     }
   ]
 }
