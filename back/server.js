@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import fs from "fs/promises";
 import { nanoid } from "nanoid";
+import { fileURLToPath } from "url";
+import path from "path";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,7 +15,10 @@ app.use(cors());
 app.use(express.json());
 
 // on fait un chemin de db.json pour qu'il lise les donnéess
-const DB_FILE = new URL("./db.json", import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DB_FILE = path.join(__dirname, "db.json");
+console.log(DB_FILE);
 
 //On lit le fichier
 async function readDB() {
@@ -58,12 +63,11 @@ app.get("/listings/:id", async (req, res) => {
 
 //creation de l'annonce
 app.post("/listings", async (req, res) => {
-  // ← FIX : ajouté le “/” au chemin
   try {
     const db = await readDB();
     const nouvelleAnnonce = { id: nanoid(8), ...req.body };
     db.listings.push(nouvelleAnnonce);
-    await writeDB(db); // ← utilise maintenant writeDB()
+    await writeDB(db);
     res.status(201).json(nouvelleAnnonce);
   } catch (err) {
     console.error(err);
