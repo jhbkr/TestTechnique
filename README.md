@@ -1,12 +1,93 @@
-# React + Vite
+🏠 Colocations
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application web fullstack permettant de gérer des annonces de colocation : création, modification, suppression et consultation d'annonces.
 
-Currently, two official plugins are available:
+📋 Table des matières
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   1. Fonctionnalités
 
-## Expanding the ESLint configuration
+   2. Technologies utilisées
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   3. Installation
+
+   4. Utilisation
+
+   5. Structure du projet
+
+   6. Contribuer
+
+   7. Licence
+
+🛠️ Techno utilisées
+
+Frontend
+
+    React
+
+    Vite
+
+    Tailwind CSS
+
+    React Router
+
+    React Hook Form
+
+    Zod
+
+Backend
+
+    Node.js
+
+    Express
+
+    NanoID
+
+    Stockage local avec un fichier db.json
+
+🚀 1. Installation
+
+    Cloner le dépôt : git@github.com:jhbkr/TestTechnique.git
+    cd TestTechnique 
+    
+    2. Installer les dépendances :
+    installer les dépendances du back
+    cd back 
+    npm i ou npm install c'est pareil 
+
+    3. installer les dépendances du front
+    cd front 
+    npm i ou npm install aussi c'est la mêle chose 
+
+    Lancer l'application :
+    retourner à la racine du projet. Si tu es dans le back tu fais cd ..
+    pour lancer le back et tu fais un node server.js
+
+    si tu est dans le front pareil cd .. puis npm run dev
+
+    💻 Utilisation
+
+    Dans le terminal faire un ctrl + click sur le http://localhost:5173/ 
+    Tu peux maintenant tester l'applications :D
+    CRUD pour les annonces 
+
+
+STRUCTURE DU PROJET 
+    TestTechnique/
+├── back/               # Backend Express
+│   ├── db.json         # Fichier de stockage des annonces
+│   └── server.js       # Serveur Express
+├── front/              # Frontend React
+│   ├── src/
+│   │   ├── components/ # Composants React
+│   │   ├── hooks/      # Hooks
+│   │   ├── pages/      # Pages de l'app
+│   │   ├── App.jsx     # Composant principal
+│   │   ├── index.css   # Styles globaux
+│   │   └── main.jsx    # Point d'entrée
+│   └── vite.config.js  # Configuration Vite
+└── README.md           # Documentation du projet
+
+
+Contact
+
+Pour toute question ou suggestion, veuillez me contacter à ce mail : jihad.bakari@epitech.eu
